@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Twoje Imię/Nick] - Portfolio</title>
+    <style>
+        /* --- PROSTY CSS --- */
+        :root {
+            --bg-color: #0f172a;       /* Ciemne tło */
+            --card-bg: #1e293b;        /* Tło elementów */
+            --text-main: #f8fafc;      /* Główny kolor tekstu */
+            --text-muted: #94a3b8;     /* Szary tekst */
+            --accent: #38bdf8;         /* Kolor akcentu (niebieski) */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent);
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* --- UKŁAD --- */
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 4rem 0 3rem 0;
+            border-bottom: 1px solid var(--card-bg);
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* --- SEKCJA O MNIE --- */
+        section {
+            padding-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            line-height: 1.2;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        /* --- STYL DLA UKRYTEGO SŁOWA (SPOILER) --- */
+        .spoiler {
+            background-color: var(--accent); /* Tło zakrywające */
+            color: var(--accent);            /* Tekst w kolorze tła (niewidoczny) */
+            padding: 0 6px;
+            border-radius: 4px;
+            cursor: pointer;                 /* Łapka po najechaniu */
+            user-select: none;               /* Blokada zaznaczania tekstu */
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .spoiler:hover {
+            opacity: 0.8;
+        }
+
+        /* Klasa dodawana po kliknięciu (odkrywa tekst) */
+        .spoiler.revealed {
+            background-color: rgba(56, 189, 248, 0.2); /* Lekko przezroczyste tło */
+            color: var(--text-main);                   /* Normalny kolor tekstu */
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- NAGŁÓWEK -->
+        <header>
+            <h1>kliknij w to szmato<span class="spoiler">jestes kurwom</span></h1>
+            <p class="subtitle">[Krótki opis, np. Frontend Developer]</p>
+            
+            <div class="socials">
+                <a href="https://github.com/[TwójLogin]" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/[TwójProfil]" target="_blank">LinkedIn</a>
+                <a href="mailto:[twój@email.com]">Email</a>
+            </div>
+        </header>
+
+        <!-- O MNIE -->
+        <section id="about">
+            <h2>O mnie</h2>
+            <p>
+                Tutaj wpisz tekst o sobie. Możesz napisać, że interesujesz się programowaniem, ale tak naprawdę Twoją największą pasją są <span class="spoiler">koty</span> i <span class="spoiler">gry wideo</span>. 
+            </p>
+            <p>
+                Kliknij w niebieskie pola powyżej, aby odkryć ukryte słowa. Możesz używać tego efektu wielokrotnie w tekście.
+            </p>
+        </section>
+
+    </div>
+
+    <!-- SKRYPT DO OBSŁUGI KLIKNIĘCIA -->
+    <script>
+        // Znajdź wszystkie elementy z klasą 'spoiler'
+        const spoilers = document.querySelectorAll('.spoiler');
+
+        // Dla każdego elementu dodaj nasłuchiwanie kliknięcia
+        spoilers.forEach(element => {
+            element.addEventListener('click', function() {
+                // Dodaj klasę 'revealed', która zmienia wygląd
+                this.classList.add('revealed');
+            });
+        });
+    </script>
+
+</body>
+</html>
