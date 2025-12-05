@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siema</title>
+    <title>Niespodzianka</title>
     <style>
         body {
             background-color: #0f172a; /* Ciemne tło */
             color: #f8fafc;            /* Jasny tekst */
             font-family: sans-serif;
             margin: 0;
-            height: 100vh;             /* Strona na całą wysokość ekranu */
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;   /* Wyśrodkowanie pionowe */
-            align-items: center;       /* Wyśrodkowanie poziome */
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            overflow: hidden; /* Żeby paski przewijania nie skakały */
         }
 
         h1 {
@@ -25,15 +26,16 @@
 
         /* STYL SPOILERA */
         .spoiler {
-            background-color: #38bdf8; /* Kolor zasłaniający (niebieski) */
-            color: #38bdf8;            /* Tekst w tym samym kolorze (niewidoczny) */
-            padding: 10px 20px;
+            background-color: #38bdf8; /* Kolor zasłaniający */
+            color: #38bdf8;            /* Tekst ukryty */
+            padding: 15px 30px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
-            user-select: none;         /* Nie da się zaznaczyć tekstu myszką */
+            user-select: none;
             transition: all 0.3s ease;
+            min-width: 300px; /* Żeby box nie skakał przy zmianie długości słów */
         }
 
         .spoiler:hover {
@@ -43,24 +45,68 @@
         /* Wygląd po kliknięciu */
         .spoiler.revealed {
             background-color: transparent;
-            color: #38bdf8;            /* Tekst staje się widoczny */
-            border: 2px solid #38bdf8; /* Ramka dla ozdoby */
+            color: #38bdf8;
+            border: 2px solid #38bdf8;
             cursor: default;
+            animation: pulse 0.5s ease-in-out; /* Mały efekt przy odkryciu */
+        }
+
+        /* Animacja zmiany tekstu (opcjonalna) */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
     <!-- TEKST NA GÓRZE -->
-    <h1>siema kliknij w to szmatoo</h1>
+    <h1>siema kliknij w to nizej</h1>
 
-    <!-- UKRYTE SŁOWO (zmień tekst "TAJEMNICA" na co chcesz) -->
-    <div class="spoiler">jestes kurwom m</div>
+    <!-- POKEMNIK NA ZMIENIAJĄCE SIĘ SŁOWA -->
+    <div class="spoiler" id="wordBox">KLIKNIJ TU</div>
 
     <!-- SKRYPT -->
     <script>
-        document.querySelector('.spoiler').addEventListener('click', function() {
-            this.classList.add('revealed');
+        // --- TUTAJ WPISZ SWOJE 10 SŁÓW ---
+        const slowa = [
+            "dziwka", 
+            "szmata", 
+            "suka", 
+            "debil", 
+            "cwelica", 
+            "kurwa", 
+            "zmywara", 
+           
+        ];
+
+        const box = document.getElementById('wordBox');
+        let czyKlikniete = false;
+
+        box.addEventListener('click', function() {
+            if (czyKlikniete) return; // Blokada, żeby nie klikać drugi raz
+            czyKlikniete = true;
+
+            this.classList.add('revealed'); // Odsłaniamy
+            
+            let index = 0;
+            
+            // Pokaż pierwsze słowo od razu
+            this.innerText = slowa[index];
+
+            // Ustaw pętlę co 2 sekundy (2000 ms)
+            const interval = setInterval(() => {
+                index++;
+                
+                // Jeśli lista się skończyła, zatrzymaj
+                if (index >= slowa.length) {
+                    clearInterval(interval);
+                } else {
+                    // Pokaż kolejne słowo
+                    this.innerText = slowa[index];
+                }
+            }, 2000);
         });
     </script>
 
