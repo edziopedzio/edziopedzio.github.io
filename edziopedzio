@@ -52,7 +52,7 @@
 <body>
 
     <!-- TEKST NA GÓRZE -->
-    <h1>siema kliknij w to szmato</h1>
+    <h1>siema kliknij w to szmatoo</h1>
 
     <!-- UKRYTE SŁOWO (zmień tekst "TAJEMNICA" na co chcesz) -->
     <div class="spoiler">jestes kurwom m</div>
